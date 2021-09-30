@@ -3,6 +3,7 @@ package com.example.motionsensor;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -10,6 +11,8 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +21,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     SensorManager sensorManager = null;
     TextView textView1 = null;
+    Button btnOtherActivity = null;
     List list;
 
     SensorEventListener sensorEventListener = new SensorEventListener() {
@@ -47,8 +51,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         textView1 = findViewById(R.id.textViewData);
+        btnOtherActivity = findViewById(R.id.buttonOtherActivity);
 
         list = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER);
 
@@ -59,6 +65,15 @@ public class MainActivity extends AppCompatActivity {
         else{
             Toast.makeText(getApplicationContext(), "Error: No Accelerometer", Toast.LENGTH_LONG).show();
         }
+
+        btnOtherActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), other_activity.class);
+                startActivity(intent);
+
+            }
+        });
     }
 
     @Override
