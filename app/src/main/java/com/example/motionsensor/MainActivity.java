@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
             textView1.setText("x: "+values[0]+"\ny: "+values[1]+"\nz: "+values[2]);
 
 
+
         }
 
         @RequiresApi(api = Build.VERSION_CODES.N)
